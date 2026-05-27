@@ -153,7 +153,7 @@ export default {
 				'fade-in-delay': 'fade-in-delay 0.5s ease-out forwards',
 				'fade-up': 'fade-up 1s ease-out forwards',
       			'fade-in': 'fade-in 1s ease-out forwards',
-				typing: 'typing 12s steps(120) infinite, blink 0.7s step-end infinite',
+				typing: 'typing 12s steps(130) infinite, blink 0.7s step-end infinite',
 				gradient: 'gradient 5s linear infinite',
 			},
 			fontFamily: {

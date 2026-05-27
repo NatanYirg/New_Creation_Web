@@ -3,40 +3,39 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail, Clock, CheckCircle } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { sendContactMessage } from "@/api/contact";
 import bgimg from "@/assets/home-hero-congregation.jpg";
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: () => sendContactMessage({ full_name: formData.name, email: formData.email, message: formData.message }),
+    onSuccess: () => {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+    },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log("Contact form submitted:", formData);
-    setFormData({ name: "", email: "", message: "" });
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); mutation.mutate(); };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div id="contact" className="relative w-full overflow-hidden">
     <Section background="soft">
       {/* <SectionHeader 
         title="Contact Us"
         subtitle="We'd love to hear from you! Whether you have questions, prayer requests, or just want to connect, don't hesitate to reach out."
       /> */}
 
-       <div className="relative -mt-16 left-1/2 right-1/2 w-screen -translate-x-1/2 h-[200px] flex-col items-center justify-center overflow-hidden]">
+      <div className="relative -mt-16 left-1/2 right-1/2 w-screen -translate-x-1/2 h-[120px] sm:h-[150px] md:h-[200px] flex-col items-center justify-center overflow-hidden">
       
       <img
         src={bgimg}
@@ -47,13 +46,13 @@ export function Contact() {
      
       <div className="absolute inset-0 bg-[#2B1F66]/[0.92]" />
 
-        <div className="relative z-10 flex flex-col items-center justify-center">
+        <div className="relative z-10 flex flex-col items-center justify-center px-4 h-full">
       
-          <h1 className="z-10 font-['Outfit'] font-bold text-[110px] text-white -ml-[420px] tracking-tight">
+          <h1 className="z-10 font-['Outfit'] font-bold text-3xl sm:text-5xl md:text-7xl lg:text-[110px] text-white text-center tracking-tight">
             Contact Us
           </h1>
 
-      <div className="absolute bottom-[10px] w-[800px] h-[73px] bg-[#6D28D9] -ml-[420px] -z-10" />
+      <div className="absolute bottom-0 left-0 right-0 w-full h-[30px] sm:h-[50px] md:h-[73px] bg-[#6D28D9] -z-10" />
       
        </div>
 
@@ -65,61 +64,44 @@ export function Contact() {
             <h3 className="text-2xl font-bold text-foreground mb-6">
               Send Us a Message
             </h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                  Full Name
-                </label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your full name"
-                />
+
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center py-10 text-center space-y-4">
+                <CheckCircle className="w-16 h-16 text-green-500" />
+                <h4 className="text-xl font-bold text-gray-800">Message Sent!</h4>
+                <p className="text-gray-500 max-w-xs">
+                  Thank you for reaching out. We'll get back to you within 24 hours.
+                </p>
+                <Button variant="outline" onClick={() => setSubmitted(false)}
+                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground mt-2">
+                  Send Another Message
+                </Button>
               </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                  Email Address
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your email address"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  placeholder="How can we help you? Share your questions, prayer requests, or just say hello!"
-                  className="min-h-[120px]"
-                />
-              </div>
-              
-              <Button 
-                type="submit"
-                size="lg"
-                className="w-full bg-[#6D28D9] hover:bg-primary-dark text-primary-foreground"
-              >
-                Send Message
-              </Button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">Full Name</label>
+                  <Input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required placeholder="Enter your full name" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">Email Address</label>
+                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="Enter your email address" />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">Message</label>
+                  <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required
+                    placeholder="How can we help you? Share your questions, prayer requests, or just say hello!"
+                    className="min-h-[120px]" />
+                </div>
+                {mutation.isError && (
+                  <p className="text-sm text-red-500">Failed to send message. Please try again.</p>
+                )}
+                <Button type="submit" size="lg" disabled={mutation.isPending}
+                  className="w-full bg-[#6D28D9] hover:bg-primary-dark text-primary-foreground disabled:opacity-50">
+                  {mutation.isPending ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+            )}
           </CardContent>
         </Card>
         
@@ -156,7 +138,7 @@ export function Contact() {
                     Email
                   </h4>
                   <p className="text-text-soft">
-                    info@gracecommunity.org
+                    info@ncic.org
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
                     We respond within 24 hours

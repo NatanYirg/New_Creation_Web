@@ -1,71 +1,65 @@
-import { Section, SectionHeader } from "@/components/ui/section";
+import { Section } from "@/components/ui/section";
 import pastorImage from "@/assets/pastor-couple.jpg";
+import { Button } from "@/components/ui/button";
 
 export function Pastor() {
   return (
-    <Section background="soft">
-      <div className="text-center">
-        <h2 className="font-['Outfit'] text-[62px] leading-[70px] font-extralight text-[#343C2B] inline-block relative mt-10">
-          <span className="font-bold text-[#6D28D9]">Apostle </span>
-          Bisrat
-           <br /> 
-          Bezuay<span className="relative inline-block">
-            ene
-            <span className="absolute bottom-[-19px] right-[0] w-[125px] h-[1px] bg-[#6D28D9]"></span>
-          </span> 
-          {/* <span className="font-bold text-[#6D28D9]">Apostle </span>
-          Bisrat Bezuayene
-          
-            <br />
-            <span>Meron </span>
-            <span className="text-[#6D28D9]">Al</span><span className="text-[#6D28D9] relative inline-block">emu
-            <span className="absolute bottom-[-6px] right-[0] w-[125px] h-[1px] bg-[#343C2B]"></span>
-            </span> */}
-          
-        </h2>
-      </div>
+    <Section background="default" className="py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Left Side - Image with Blue Border */}
+          <div className="relative px-6 md:px-0">
+            <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-full h-full bg-[#0076C0] rounded-lg -z-10"></div>
+            <div className="relative overflow-hidden rounded-lg shadow-2xl">
+              <img
+                src={pastorImage}
+                alt="Apostle Bisrat Bezuayene and Meron Alemu"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
 
-      
-      <div className="flex flex-col lg:flex-row gap-12 items-center">
-        {/* <div className="order-2 lg:order-1">
-          <img
-            src={pastorImage}
-            alt="Apostle Bisrat (Japi) and Meron Alemu"
-            className="w-full rounded-xl shadow-medium object-cover aspect-[4/3]"
-          />
-        </div> */}
-        
-        <div className="order-1 lg:order-2 space-y-6 mt-20">
-          {/* <div>
-            <h3 className="text-2xl font-bold text-[#242054] mb-12">
-            Apostle Bisrat (Japi) and Meron Alemu
-            </h3>
-            <p className="text-primary font-medium">Senior Pastor & First Lady</p>
-          </div> */}
-          
-          <div className="flex flex-col items-center text-center font-['Outfit'] text-[18px] text-[#242054] leading-relaxed space-y-6 mt-8">
-            <p>
-              Pastor John has been faithfully serving our community for over 15 years, bringing a heart 
-              for pastoral care and biblical teaching that transforms lives. Alongside his beloved wife Mary, 
-              they have dedicated their lives to creating a church home where every person feels valued and loved.
-            </p>
+          {/* Right Side - Content */}
+          <div className="space-y-4 md:space-y-6 px-4 md:px-0">
+            <h2 className="font-outfit font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#242054] leading-tight">
+              APOSTLE BISRAT & MERON ALEMU
+            </h2>
             
-            <p>
-              "Our greatest joy is watching individuals and families discover their God-given purpose and 
-              walking alongside them as they grow in faith. This church is more than a building – it's a 
-              family where everyone belongs."
-            </p>
-            
-            <div className="pt-4">
-              <p className="text-sm text-muted-foreground italic">
-                "For I know the plans I have for you," declares the Lord, "plans to prosper you and not to 
-                harm you, to give you hope and a future." - Jeremiah 29:11
+            <div className="space-y-3 md:space-y-4 text-gray-700 leading-relaxed text-base md:text-lg">
+              <p>
+                At New Creation International Church Ethiopia, we believe your best days are still out in front of you. Whether you are joining us in person or online, we invite you to experience our services and be a part of the New Creation family.
               </p>
               
-              <button className="mt-14 border border-[#242054] text-[#242054] px-8 py-3 rounded-full hover:bg-[#242054] hover:text-white transition-all duration-300">
-                Read More
-              </button>
+              <p>
+                The Bible says when you are planted in the house of the Lord, you will flourish. Get ready to step into a new level of your destiny!
+              </p>
+            </div>
 
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 pt-4">
+              <Button 
+                size="lg"
+                onClick={() => {
+                  const welcomeSection = document.getElementById('welcome');
+                  if (welcomeSection) {
+                    welcomeSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="w-full sm:w-auto bg-transparent border-2 border-[#242054] text-[#242054] font-outfit font-semibold px-6 md:px-8 py-5 md:py-6 text-sm md:text-base rounded-md hover:bg-[#242054] hover:text-white transition-all duration-300"
+              >
+                Welcome to New Creation
+              </Button>
+              <Button 
+                size="lg"
+                onClick={() => {
+                  const welcomeSection = document.getElementById('welcome');
+                  if (welcomeSection) {
+                    welcomeSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="w-full sm:w-auto bg-transparent border-2 border-[#242054] text-[#242054] font-outfit font-semibold px-6 md:px-8 py-5 md:py-6 text-sm md:text-base rounded-md hover:bg-[#242054] hover:text-white transition-all duration-300"
+              >
+                New Here?
+              </Button>
             </div>
           </div>
         </div>

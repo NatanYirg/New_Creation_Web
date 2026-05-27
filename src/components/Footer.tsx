@@ -16,16 +16,36 @@ export function Footer() {
               as we journey together in faith and make a difference in our world.
             </p>
             <div className="flex gap-3">
-              <a href="http://www.facebook.com/newcreationchurchethiopia" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors">
+              <a 
+                href="http://www.facebook.com/newcreationchurchethiopia" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors">
+              <a 
+                href="https://www.instagram.com/intchurch/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="http://www.youtube.com/@NewCreationChurchEthiopia" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors">
+              <a 
+                href="http://www.youtube.com/@NewCreationChurchEthiopia" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors"
+              >
                 <Youtube className="w-5 h-5" />
               </a>
-              <a href="https://www.tiktok.com/@newcreationintchurch" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors">
+              <a 
+                href="https://www.tiktok.com/@newcreationintchurch" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-stone-400 transition-colors"
+              >
                 <FaTiktok className="w-5 h-5" />
               </a>
               

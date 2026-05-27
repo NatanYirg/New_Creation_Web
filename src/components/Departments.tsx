@@ -7,6 +7,8 @@ import youthimg from "@/assets/champions.jpg"
 import childrenimg from "@/assets/kids.jpg"
 import marriageimg from "@/assets/Marraige team.jpg"
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const departments = [
   {
@@ -20,7 +22,7 @@ const departments = [
   {
     id: 2,
     name: "Children Ministry",
-    description: "Leading our congregation in heartfelt worship through music that glorifies God and touches hearts across all ages and musical preferences.",
+    description: "Shaping young hearts and minds by equipping the future generation with the Word of God.",
     icon: Music,
     color: "text-gold-dark",
     image: childrenimg
@@ -28,10 +30,26 @@ const departments = [
   {
     id: 3,
     name: "Marriage Council",
-    description: "Serving our local community with Christ's love through food pantries, community events, and mission work that makes a tangible difference.",
+    description: "Building strong, God-first families anchored in biblical truth and lifelong love.",
     icon: Heart,
     color: "text-primary-light",
     image: marriageimg
+  },
+  {
+    id: 4,
+    name: "Youth Ministry",
+    description: "Empowering the next generation to know God, grow in faith, and make a difference in their world through dynamic programs and mentorship.",
+    icon: Users,
+    color: "text-primary",
+    image: youthimg
+  },
+  {
+    id: 5,
+    name: "Children Ministry",
+    description: "Shaping young hearts and minds by equipping the future generation with the Word of God.",
+    icon: Music,
+    color: "text-gold-dark",
+    image: childrenimg
   },/* 
   {
     id: 4,
@@ -60,117 +78,146 @@ const departments = [
 ];
 
 export function Departments() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
     <Section>
-      {/* <SectionHeader 
-        title="Our Ministries"
-        subtitle="Every person has a unique calling and gifting. Explore our ministries and discover where God is calling you to serve and grow."
-      /> */}
-
-      {/* <div className="absolute inset-0 bg-[#2B1F66]/[0.92]" /> */}
-
-      <div className="flex flex-row items-center gap-3 mt-8">
-          <h3 className="font-['Outfit'] font-semibold text-[20px] leading-[36px] text-[#0076C0]">
-            Our Ministries
-          </h3>
-          <div className="h-[1px] w-[90px] bg-[#0076C0]" />
+      <div className="flex flex-row items-center gap-3 mt-8 px-4 md:px-0">
+        <h3 className="font-['Outfit'] font-semibold text-base md:text-[20px] leading-[36px] text-[#0076C0]">
+          Our Ministries
+        </h3>
+        <div className="h-[1px] w-[60px] md:w-[90px] bg-[#0076C0]" />
       </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center ml-[1150px] -mt-28">
-      {/* Text Layer */}
-          <h1 className="relative z-10 font-['Outfit'] font-bold text-[120px] text-black -ml-[420px] tracking-tight relative">
-            <span className="text-white">Minis</span>tries
-          </h1>
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 md:px-0 mt-6 md:mt-0 md:ml-[1150px] md:-mt-28">
+        {/* Text Layer */}
+        <h1 className="relative z-10 font-['Outfit'] font-bold text-4xl sm:text-5xl md:text-7xl lg:text-[120px] text-black text-center md:text-left md:-ml-[420px] tracking-tight">
+          <span className="relative inline-block">
+            <span className="relative z-10 text-white">Minis</span>
+            <span className="absolute inset-0 bg-[#6D28D9] -z-10 scale-x-110 scale-y-110" />
+          </span>tries
+        </h1>
+      </div>
 
-      <div className="absolute bottom-[10px] w-[300px] h-[100px] bg-[#6D28D9] -ml-[680px] -z-10 mb-[36px]" />
-      
-       </div>
-
-
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-12 mb-16">
-        {departments.map((department) => (
-          <Card key={department.id} className="group hover:shadow-medium transition-all duration-300 border-gold/10 hover:border-gold/30">
-            <CardContent className="p-6">
-              {/* <div className="aspect-video bg-gradient-hero rounded-lg mb-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                <div className="w-16 h-16 flex items-center justify-center backdrop-blur-sm"> */}
-                  {/* <Play className="w-8 h-8 text-white ml-1" /> */}
-               {/*  </div>
-              </div> */}
-
-              <div className="aspect-video rounded-lg mb-4 overflow-hidden group-hover:scale-105 transition-transform duration-300">
-                <img
-                  src={department.image} // Replace with your image path
-                  alt={department.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              
-              <div className="space-y-3">
-                <div className="text-sm text-primary font-medium">{department.name}</div>
-                
-                <h3 className="text-md font-bold text-foreground group-hover:text-primary transition-colors">
-                  {department.description}
-                </h3>
-                
-                {/* <p className="text-text-soft leading-relaxed">
-                  {teaching.excerpt}
-                </p> */}
-                
-                
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-
-        {/* Right Button */}
-          <div className="absolute right-[45px] flex items-center mt-24">
-            <button
-              aria-label="Next"
-              title="Next"
-              className="text-black/70 hover:text-black transition"
+      <div ref={sectionRef} className="relative overflow-hidden mt-8 md:mt-12 mb-12 md:mb-16">
+        {/* Scrolling container */}
+        <div className="flex gap-4 md:gap-6 animate-scroll">
+          {/* First set of cards */}
+          {departments.map((department, index) => (
+            <Card 
+              key={`first-${department.id}`} 
+              className={`flex-shrink-0 w-[280px] md:w-[400px] group hover:shadow-medium transition-all duration-300 border-gold/10 hover:border-gold/30 ${
+                isVisible ? 'animate-fade-up' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${index * 0.15}s` }}
             >
-              <ChevronRight size={70} strokeWidth={2.5} />
-            </button>
-          </div>
-
-      </div>
-
-
-
-      
-      {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {departments.map((dept) => {
-          const IconComponent = dept.icon;
-          return (
-            <Card key={dept.id} className="group hover:shadow-medium transition-all duration-300 border-gold/10 hover:border-gold/30">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-soft rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <IconComponent className={`w-8 h-8 ${dept.color}`} />
+              <CardContent className="p-4 md:p-6">
+                <div className="aspect-video rounded-lg mb-3 md:mb-4 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={department.image}
+                    alt={department.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {dept.name}
-                </h3>
-                
-                <p className="text-text-soft leading-relaxed">
-                  {dept.description}
-                </p>
+
+                <div className="space-y-2 md:space-y-3">
+                  <div className="text-xs md:text-sm text-primary font-medium">{department.name}</div>
+                  
+                  <h3 className="text-sm md:text-md font-bold text-foreground group-hover:text-primary transition-colors">
+                    {department.description}
+                  </h3>
+                </div>
               </CardContent>
             </Card>
-          );
-        })}
-      </div> */}
-      
-      <div className="text-center">
-        <Button 
-          variant="outline"
-          size="lg"
-          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-        >
-          Explore All Departments
-        </Button>
+          ))}
+          
+          {/* Duplicate set for seamless loop */}
+          {departments.map((department, index) => (
+            <Card 
+              key={`second-${department.id}`} 
+              className={`flex-shrink-0 w-[280px] md:w-[400px] group hover:shadow-medium transition-all duration-300 border-gold/10 hover:border-gold/30 ${
+                isVisible ? 'animate-fade-up' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${(index + departments.length) * 0.15}s` }}
+            >
+              <CardContent className="p-4 md:p-6">
+                <div className="aspect-video rounded-lg mb-3 md:mb-4 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={department.image}
+                    alt={department.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="space-y-2 md:space-y-3">
+                  <div className="text-xs md:text-sm text-primary font-medium">{department.name}</div>
+                  
+                  <h3 className="text-sm md:text-md font-bold text-foreground group-hover:text-primary transition-colors">
+                    {department.description}
+                  </h3>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+        
+        .animate-fade-up {
+          animation: fadeUp 0.6s ease-out forwards;
+        }
+      `}</style>
+      
     </Section>
   );
 }

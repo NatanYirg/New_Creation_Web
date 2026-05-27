@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { Pastor } from "@/components/Pastor";
+import { Welcome } from "@/components/Welcome";
 import { Devotional } from "@/components/Devotional";
 import { Teachings } from "@/components/Teachings";
 import { Testimonies } from "@/components/Testimonies";
@@ -11,26 +12,24 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { Discover } from "@/components/Discover";
-import { Feeds } from "@/components/Feeds";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Hero />
       <Navbar />
       <Pastor />
-      <Discover />
-      <Testimonies />
-      <Departments />
+      <Welcome />
       <Services />
-      <Feeds />
-      <Devotional />
+      <Discover />
+      <Departments />
+      <Testimonies />
       <Teachings />
+      <Devotional />
       <Newsletter />
       <Contact />
       <Location />
       <Footer />
-    
     </div>
   );
 };

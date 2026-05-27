@@ -5,7 +5,7 @@ import { MapPin, Navigation } from "lucide-react";
 
 export function Location() {
   return (
-    <Section>
+    <Section id="location">
       <SectionHeader 
         title="Visit Us"
         subtitle="We'd love to welcome you to our church home. Come as you are – you'll find a warm, welcoming community ready to embrace you."

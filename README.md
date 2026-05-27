@@ -1,22 +1,14 @@
-# Welcome to your Lovable project
+# New Creation International Church Ethiopia
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/fdd56d10-6db3-45a9-b1c4-dd28bf36a190
+This is the official website for New Creation International Church Ethiopia (NCIC), featuring information about our church, ministries, services, and daily devotionals.
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/fdd56d10-6db3-45a9-b1c4-dd28bf36a190) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+## Development Setup
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Clone this repository and start developing locally.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +54,12 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/fdd56d10-6db3-45a9-b1c4-dd28bf36a190) and click on Share -> Publish.
+You can deploy this project using various hosting platforms like Vercel, Netlify, or any static hosting service that supports Vite applications.
 
-## Can I connect a custom domain to my Lovable project?
+Build the project for production:
 
-Yes, you can!
+```sh
+npm run build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+The built files will be in the `dist` directory, ready for deployment.
